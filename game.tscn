@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://ca42ub50ubhom"]
+[gd_scene load_steps=7 format=3 uid="uid://ca42ub50ubhom"]
 
 [ext_resource type="PackedScene" uid="uid://jlx3dajcfqbc" path="res://player/player.tscn" id="1_80nbo"]
 [ext_resource type="Material" uid="uid://yg5aql6nhn3m" path="res://level/tower.tres" id="1_feb5d"]
 [ext_resource type="Material" uid="uid://bd0a6dj70q261" path="res://level/platform.tres" id="3_fc0e3"]
 [ext_resource type="PackedScene" uid="uid://hkjagiexhtlq" path="res://mob/mob.tscn" id="4_fc0e3"]
+[ext_resource type="PackedScene" uid="uid://qcqwovqr534r" path="res://mob/spawner/spawner_3d.tscn" id="5_7jktm"]
 
 [sub_resource type="Environment" id="Environment_80nbo"]
 background_mode = 1
@@ -55,3 +56,6 @@ material = ExtResource("3_fc0e3")
 
 [node name="Mob" parent="." instance=ExtResource("4_fc0e3")]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 14, 3, 6)
+
+[node name="Spawner3D" parent="." instance=ExtResource("5_7jktm")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 5.780451, 3.678875, -18.524527)
