@@ -1,9 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://ca42ub50ubhom"]
+[gd_scene load_steps=9 format=3 uid="uid://ca42ub50ubhom"]
 
+[ext_resource type="Script" uid="uid://cd3psrcwfehv0" path="res://game.gd" id="1_7jktm"]
 [ext_resource type="PackedScene" uid="uid://jlx3dajcfqbc" path="res://player/player.tscn" id="1_80nbo"]
 [ext_resource type="Material" uid="uid://yg5aql6nhn3m" path="res://level/tower.tres" id="1_feb5d"]
 [ext_resource type="Material" uid="uid://bd0a6dj70q261" path="res://level/platform.tres" id="3_fc0e3"]
-[ext_resource type="PackedScene" uid="uid://hkjagiexhtlq" path="res://mob/mob.tscn" id="4_fc0e3"]
 [ext_resource type="PackedScene" uid="uid://qcqwovqr534r" path="res://mob/spawner/spawner_3d.tscn" id="5_7jktm"]
 
 [sub_resource type="Environment" id="Environment_80nbo"]
@@ -18,7 +18,13 @@ fog_light_color = Color(0.226372, 0.53447485, 0.9936386, 1)
 fog_height = 0.5
 fog_height_density = 0.2
 
+[sub_resource type="LabelSettings" id="LabelSettings_ryrav"]
+font_size = 56
+
+[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_7jktm"]
+
 [node name="Game" type="Node3D"]
+script = ExtResource("1_7jktm")
 
 [node name="CSGBox3D" type="CSGBox3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, -5, 7)
@@ -42,10 +48,22 @@ use_collision = true
 size = Vector3(17, 10, 17)
 material = ExtResource("1_feb5d")
 
+[node name="CSGBox3D6" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -22.425627, -5, -20.5)
+use_collision = true
+size = Vector3(17, 10, 17)
+material = ExtResource("1_feb5d")
+
 [node name="CSGBox3D3" type="CSGBox3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, -0.6999998, -4.5)
 use_collision = true
 size = Vector3(6, 2, 7)
+material = ExtResource("3_fc0e3")
+
+[node name="CSGBox3D5" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.024126, -1.1795626, 0.8773327)
+use_collision = true
+size = Vector3(6, 2, 17.220581)
 material = ExtResource("3_fc0e3")
 
 [node name="CSGBox3D4" type="CSGBox3D" parent="."]
@@ -54,8 +72,28 @@ use_collision = true
 size = Vector3(6, 2, 7)
 material = ExtResource("3_fc0e3")
 
-[node name="Mob" parent="." instance=ExtResource("4_fc0e3")]
-transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 14, 3, 6)
-
 [node name="Spawner3D" parent="." instance=ExtResource("5_7jktm")]
-transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 5.780451, 3.678875, -18.524527)
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 5.780451, 0.17498088, -18.524527)
+
+[node name="Spawner3D2" parent="." instance=ExtResource("5_7jktm")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -16.328278, -0.097210884, 4.861729)
+
+[node name="Label" type="Label" parent="."]
+unique_name_in_owner = true
+offset_left = 51.0
+offset_top = 43.0
+offset_right = 263.0
+offset_bottom = 120.0
+text = "Score: 0"
+label_settings = SubResource("LabelSettings_ryrav")
+
+[node name="KillArea" type="Area3D" parent="."]
+collision_layer = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="KillArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -21.19345, 0)
+shape = SubResource("WorldBoundaryShape3D_7jktm")
+
+[connection signal="mob_spawned" from="Spawner3D" to="." method="_on_spawner_3d_mob_spawned"]
+[connection signal="mob_spawned" from="Spawner3D2" to="." method="_on_spawner_3d_mob_spawned"]
+[connection signal="body_entered" from="KillArea" to="." method="_on_kill_area_body_entered"]

@@ -1,12 +1,14 @@
-[gd_scene load_steps=5 format=3 uid="uid://jlx3dajcfqbc"]
+[gd_scene load_steps=6 format=3 uid="uid://jlx3dajcfqbc"]
 
 [ext_resource type="PackedScene" uid="uid://chjrhhjvxun3r" path="res://player/simple_gun/gun_model.glb" id="1_oul6g"]
 [ext_resource type="Script" uid="uid://dkbf52x46den6" path="res://player/player.gd" id="1_rkbax"]
 [ext_resource type="Texture2D" uid="uid://cuyh8hew637ju" path="res://player/reticle.png" id="3_g1dw6"]
+[ext_resource type="AudioStream" uid="uid://bi6ansiu0g7gi" path="res://player/gun_shoot.wav" id="4_yw30f"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_kqu6x"]
 
 [node name="Player" type="CharacterBody3D"]
+collision_mask = 3
 script = ExtResource("1_rkbax")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
@@ -43,3 +45,7 @@ expand_mode = 1
 unique_name_in_owner = true
 wait_time = 0.3
 one_shot = true
+
+[node name="GunShootPlayer" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("4_yw30f")

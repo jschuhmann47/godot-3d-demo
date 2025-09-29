@@ -8,6 +8,7 @@ radius = 0.2009864
 
 [node name="Bullet3D" type="Area3D"]
 top_level = true
+collision_mask = 3
 script = ExtResource("1_hgguu")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]

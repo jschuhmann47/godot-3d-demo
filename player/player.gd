@@ -51,3 +51,4 @@ func shoot_bullet() -> void:
 	new_bullet.global_transform = %Marker3D.global_transform
 	
 	%Timer.start()
+	%GunShootPlayer.play()
